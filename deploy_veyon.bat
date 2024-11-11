@@ -17,8 +17,7 @@ if %errorLevel% neq 0 (
 echo Repertoire du script : %~dp0
 echo Fichier recherche : %~dp0veyon-4.9.0.0-win64-setup.exe
 
-:: Chemin du fichier d'installation Veyon
-:: Modifiez le nom de fichier ci-dessous en fonction de la version ou du chemin de l'installateur sur votre système
+:: Vérifier si le fichier d'installation existe
 if not exist "%~dp0veyon-4.9.0.0-win64-setup.exe" (
     echo Le fichier veyon-4.9.0.0-win64-setup.exe n'a pas ete trouve.
     echo Chemin complet recherche : %~dp0veyon-4.9.0.0-win64-setup.exe
@@ -27,14 +26,12 @@ if not exist "%~dp0veyon-4.9.0.0-win64-setup.exe" (
 )
 
 echo Installation silencieuse de Veyon...
-:: Lancer l'installation en mode silencieux. Modifiez le chemin et les options selon vos besoins.
 "%~dp0veyon-4.9.0.0-win64-setup.exe" /S
 
-:: Attendre que l'installation se termine. Ajustez le délai si nécessaire.
+:: Attendre que l'installation se termine
 timeout /t 10 /nobreak
 
 :: Vérifier si l'installation a réussi
-:: Modifiez le chemin ci-dessous en fonction du dossier d'installation par défaut de Veyon sur votre système.
 if exist "C:\Program Files\Veyon" (
     echo Installation de Veyon terminee avec succes!
 ) else (
