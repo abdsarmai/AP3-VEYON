@@ -1,18 +1,18 @@
 @echo off
 setlocal enabledelayedexpansion
 
-echo V鲩fication des droits administrateur...
+echo Vérification des droits administrateur...
 NET SESSION >nul 2>&1
 if %errorLevel% neq 0 (
-    echo Ce script n飥ssite des droits administrateur. Ex飵tion annul饮
+    echo Ce script nécessite des droits administrateur. Exécution annulée
     exit /b 1
 )
 
-:: D馩nition des chemins
-set "SHARE=\\Easystore\veyon$"
+:: Définition des chemins
+set "SHARE=\"
 set "LOCAL_PATH=C:\VEYON"
 
-:: Cr顴ion du dossier local si inexistant
+:: Création du dossier local si inexistant
 if not exist "%LOCAL_PATH%" mkdir "%LOCAL_PATH%"
 
 echo Recherche du dernier fichier d'installation de Veyon...
@@ -21,11 +21,11 @@ for /f "delims=" %%i in ('dir /b /o-n "%SHARE%\veyon-*-win64-setup.exe"') do (
     goto :found
 )
 
-echo Aucun fichier d'installation de Veyon trouv頤ans le partage r鳥au.
+echo Aucun fichier d'installation de Veyon trouvé dans le partage réseau.
 exit /b 1
 
 :found
-echo Fichier trouv頺 %veyon_installer%
+echo Fichier trouvé : %veyon_installer%
 
 :: Copie du fichier localement
 echo Copie de l'installateur dans %LOCAL_PATH%...
@@ -38,9 +38,9 @@ echo Installation de Veyon en cours...
 :: Attente de l'installation
 timeout /t 10 /nobreak >nul
 
-:: V鲩fication de l'installation
+:: Vérification de l'installation
 if exist "C:\Program Files\Veyon" (
-    echo Installation de Veyon termin饠avec succ賡
+    echo Installation de Veyon terminée avec succès
 ) else (
     echo Erreur lors de l'installation de Veyon.
 )
